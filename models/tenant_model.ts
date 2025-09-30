@@ -18,11 +18,11 @@ const tenantSchema = new Schema<ITenant>(
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    phone: { type: String, required: true },
-    address: { type: String, required: true },
+    phone: { type: String, required: false },
+    address: { type: String, required: false },
     subDomain: { type: String, required: true, unique: true },
     isOnboarded: { type: Boolean, default: false },
-    adminId: { type: String, required: true },
+    adminId: { type: String, required: true }, // TODO: Reference to User model
     isEmailVerified: { type: Boolean, default: false },
   },
   { timestamps: true }
@@ -32,7 +32,7 @@ const tenantSchema = new Schema<ITenant>(
 tenantSchema.index(
   { createdAt: 1 },
   {
-    expireAfterSeconds: 10,  // 10 seconds for demo purposes
+    expireAfterSeconds: 3600*24*7, // Delete after a week 
     partialFilterExpression: { isEmailVerified: false } // only unverified docs
   }
 );

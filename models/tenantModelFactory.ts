@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { schemaMap } from "../constants/schemaConstants";
 
-export const getTenantModel = (
+export const getModel = (
   tenantId: string,
   baseName: keyof typeof schemaMap
 ) => {
